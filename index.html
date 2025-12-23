@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santa’s Cozy Gift Picker</title>
+
+    <!-- Handwritten + cozy body font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div class="snow" aria-hidden="true"></div>
+
+      <header class="header">
+        <div class="header__top">
+          <h1 class="title">Santa’s Cozy Gift Picker</h1>
+          <button
+            id="audioToggle"
+            class="audioToggle"
+            type="button"
+            aria-label="Toggle audio"
+          >
+            🔇
+            <span class="audioToggle__text">Muted</span>
+          </button>
+        </div>
+        <p class="subtitle">Hot cocoa vibes. One gift at a time. No peeking.</p>
+      </header>
+
+      <main class="scene">
+        <div class="glow" aria-hidden="true"></div>
+
+        <section class="center">
+          <div class="treeWrap" aria-label="Christmas tree">
+            <div class="tree">
+              <div class="tree__layer tree__layer--1"></div>
+              <div class="tree__layer tree__layer--2"></div>
+              <div class="tree__layer tree__layer--3"></div>
+
+              <div class="ornaments">
+                <span class="orn o1"></span>
+                <span class="orn o2"></span>
+                <span class="orn o3"></span>
+                <span class="orn o4"></span>
+                <span class="orn o5"></span>
+                <span class="orn o6"></span>
+                <span class="orn o7"></span>
+                <span class="orn o8"></span>
+              </div>
+
+              <div class="lights" aria-hidden="true">
+                <span class="light l1"></span><span class="light l2"></span
+                ><span class="light l3"></span><span class="light l4"></span>
+                <span class="light l5"></span><span class="light l6"></span
+                ><span class="light l7"></span><span class="light l8"></span>
+                <span class="light l9"></span><span class="light l10"></span
+                ><span class="light l11"></span><span class="light l12"></span>
+              </div>
+
+              <div class="trunk"></div>
+              <div class="star" aria-hidden="true">⭐</div>
+            </div>
+          </div>
+
+          <div class="santaArea">
+            <div class="santa" id="santa" aria-hidden="true">🎅</div>
+
+            <div class="speech" id="speech" role="status" aria-live="polite">
+              Ho ho ho… ready for a little Christmas magic?
+            </div>
+
+            <div class="resultCard" aria-label="Result area">
+              <div class="resultLabel">Tonight you open gift</div>
+              <div class="resultNumber" id="resultNumber">—</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel__card">
+            <div class="panel__row">
+              <div>
+                <div class="panel__title">Gift range</div>
+                <div class="panel__hint">
+                  We’ll pick a random gift number between 1 and 10.
+                </div>
+              </div>
+
+              <div class="rangePill" aria-label="Range pill">1–10</div>
+            </div>
+
+            <button id="pickBtn" class="pickBtn" type="button">
+              Ask Santa 🎁
+            </button>
+
+            <div class="gifts" id="gifts" aria-label="Gift boxes">
+              <!-- 10 gift boxes -->
+              <button
+                class="gift"
+                data-num="1"
+                type="button"
+                aria-label="Gift 1"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">1</span>
+              </button>
+              <button
+                class="gift"
+                data-num="2"
+                type="button"
+                aria-label="Gift 2"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">2</span>
+              </button>
+              <button
+                class="gift"
+                data-num="3"
+                type="button"
+                aria-label="Gift 3"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">3</span>
+              </button>
+              <button
+                class="gift"
+                data-num="4"
+                type="button"
+                aria-label="Gift 4"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">4</span>
+              </button>
+              <button
+                class="gift"
+                data-num="5"
+                type="button"
+                aria-label="Gift 5"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">5</span>
+              </button>
+              <button
+                class="gift"
+                data-num="6"
+                type="button"
+                aria-label="Gift 6"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">6</span>
+              </button>
+              <button
+                class="gift"
+                data-num="7"
+                type="button"
+                aria-label="Gift 7"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">7</span>
+              </button>
+              <button
+                class="gift"
+                data-num="8"
+                type="button"
+                aria-label="Gift 8"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">8</span>
+              </button>
+              <button
+                class="gift"
+                data-num="9"
+                type="button"
+                aria-label="Gift 9"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">9</span>
+              </button>
+              <button
+                class="gift"
+                data-num="10"
+                type="button"
+                aria-label="Gift 10"
+              >
+                <span class="gift__ribbon"></span
+                ><span class="gift__tag">10</span>
+              </button>
+            </div>
+
+            <div class="fineprint">
+              Tip: keep the audio on for max cozy. 🔥🔔
+            </div>
+          </div>
+
+          <div class="cocoa" aria-hidden="true">
+            <div class="mug">☕</div>
+            <div class="steam s1"></div>
+            <div class="steam s2"></div>
+            <div class="steam s3"></div>
+          </div>
+        </section>
+
+        <div id="sparkles" class="sparkles" aria-hidden="true"></div>
+      </main>
+    </div>
+
+    <!-- Audio (must be in /public) -->
+    <audio id="fireplace" src="/fireplace.mp3" loop preload="auto"></audio>
+    <audio id="jingle" src="/jingle.mp3" preload="auto"></audio>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
