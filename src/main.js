@@ -9,6 +9,7 @@ const gifts = Array.from(document.querySelectorAll('.gift'));
 const audioToggle = document.getElementById('audioToggle');
 const fireplace = document.getElementById('fireplace');
 const jingle = document.getElementById('jingle');
+const confetti = document.getElementById('confetti');
 
 const RANGE_MIN = 1;
 const RANGE_MAX = 10;
@@ -117,6 +118,92 @@ async function playJingle() {
   }
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+pickBtn.addEventListener('click', runSequence);
+
+function cannonConfetti({
+  durationMs = 10_000, // total duration
+  burstEveryMs = 240, // how often cannons fire
+  piecesPerSide = 12, // density
+} = {}) {
+  const emojis = [
+    '🎄',
+    '🎁',
+    '✨',
+    '❄️',
+    '⭐',
+    '🧦',
+    '🛷',
+    '🍬',
+    '🎅',
+    '🧑‍🎄',
+    '🤶',
+    '🦌',
+  ];
+
+  const start = performance.now();
+  confetti.innerHTML = '';
+
+  const shoot = () => {
+    const now = performance.now();
+    if (now - start > durationMs) return;
+
+    spawnCannon('left');
+    spawnCannon('right');
+
+    setTimeout(shoot, burstEveryMs);
+  };
+
+  function spawnCannon(side) {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    const baseX = side === 'left' ? -40 : w + 40;
+    const baseY = h - 80;
+    const dir = side === 'left' ? 1 : -1;
+
+    for (let i = 0; i < piecesPerSide; i++) {
+      const p = document.createElement('span');
+      p.className = 'confetti__piece confetti__piece--cannon';
+      p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+      const size = 14 + Math.random() * 20;
+      const dur = 2.6 + Math.random() * 1.4;
+      const spin = `${(Math.random() * 2 - 1) * 1080}deg`;
+
+      // Arc points
+      const x1 = baseX + dir * (w * (0.25 + Math.random() * 0.2));
+      const y1 = h * (0.15 + Math.random() * 0.25);
+      const x2 = baseX + dir * (w * (0.6 + Math.random() * 0.3));
+      const y2 = h + 120;
+
+      p.style.fontSize = `${size}px`;
+      p.style.setProperty('--dur', `${dur}s`);
+      p.style.setProperty('--spin', spin);
+      p.style.setProperty('--x0', `${baseX}px`);
+      p.style.setProperty('--y0', `${baseY}px`);
+      p.style.setProperty('--x1', `${x1}px`);
+      p.style.setProperty('--y1', `${y1}px`);
+      p.style.setProperty('--x2', `${x2}px`);
+      p.style.setProperty('--y2', `${y2}px`);
+      p.style.animationDelay = `${Math.random() * 120}ms`;
+
+      confetti.appendChild(p);
+      p.addEventListener('animationend', () => p.remove());
+    }
+  }
+
+  shoot();
+
+  // Cleanup safety
+  setTimeout(() => {
+    confetti.innerHTML = '';
+  }, durationMs + 5000);
+}
+
 async function runSequence() {
   if (state !== 'idle') return;
 
@@ -181,6 +268,13 @@ async function runSequence() {
   speech.textContent = `Ho ho ho! Open gift #${finalPick}! ✨`;
 
   sparkleBurst(document.getElementById('santa'));
+  // When gift number is revealed 🎁
+  cannonConfetti({
+    durationMs: 10_000,
+    burstEveryMs: 220,
+    piecesPerSide: 14,
+  });
+
   await playJingle();
 
   // Settle back
@@ -190,9 +284,3 @@ async function runSequence() {
   state = 'idle';
   setButtonDisabled(false, 'Ask Santa 🎁');
 }
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-pickBtn.addEventListener('click', runSequence);
