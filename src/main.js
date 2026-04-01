@@ -142,6 +142,9 @@ function cannonConfetti({
     '🧑‍🎄',
     '🤶',
     '🦌',
+    '🥳',
+    '🌈',
+    '🦍',
   ];
 
   const start = performance.now();
@@ -261,7 +264,7 @@ async function runSequence() {
       { transform: 'scale(1.12)', offset: 0.55 },
       { transform: 'scale(1)', offset: 1 },
     ],
-    { duration: 520, easing: 'cubic-bezier(.2,.9,.2,1)' }
+    { duration: 520, easing: 'cubic-bezier(.2,.9,.2,1)' },
   );
 
   highlightGift(finalPick);
