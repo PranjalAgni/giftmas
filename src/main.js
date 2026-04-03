@@ -145,6 +145,7 @@ function cannonConfetti({
     '🥳',
     '🌈',
     '🦍',
+    '🦧'
   ];
 
   const start = performance.now();
